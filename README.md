@@ -14,10 +14,6 @@ Example of I²C connecting VL53L1X module to Raspberry Pi:
 
 ## Installation
 
-### From package
-
-For Raspberry Pi, there exist prebuilt Debian packages. For installation, [get the package](http://coex.space/rpi-ros-kinetic/pool/main/r/ros-kinetic-vl53l1x/) to the Raspberry and install it with `dpkg -i <package-name>.deb`.
-
 ### Manual
 
 1. Clone the repository into your Colcon workspace:
