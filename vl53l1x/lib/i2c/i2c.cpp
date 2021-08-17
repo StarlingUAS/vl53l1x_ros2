@@ -1,11 +1,17 @@
+#include <stdlib.h>
 #include <linux/i2c-dev.h>
 #include <sys/ioctl.h>
 #include <stdio.h>
+#include <unistd.h>
 #include <fcntl.h>
 #include <arpa/inet.h>
-#include <ros/ros.h>
+#include <stdexcept>
+#include <memory.h>
+
 
 #include "i2c.h"
+
+using namespace std;
 
 int fd;
 
@@ -17,14 +23,16 @@ void i2c_setup(uint8_t bus, uint8_t addr)
 	fd = open(filename, O_RDWR);
 
 	if (fd < 0) {
-		ROS_FATAL("Failed to open I2C bus %d", bus);
-		ros::shutdown();
+		char buffer [50];
+		sprintf(buffer, "Failed to open I2C bus %d", bus);
+		throw std::runtime_error(buffer);
 	}
 
 	int rc = ioctl(fd, I2C_SLAVE, addr);
 	if (rc < 0) {
-		ROS_FATAL("Failed to select I2C device with address 0x%02x", addr);
-		ros::shutdown();
+  		char buffer [50];
+		sprintf(buffer, "Failed to select I2C device with address 0x%02x ", bus);
+		throw std::runtime_error(buffer);
 	}
 }
 

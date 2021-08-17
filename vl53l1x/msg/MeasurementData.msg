@@ -1,4 +1,4 @@
-Header header
+std_msgs/Header header
 
 # Some of the fields of resulting RangingMeasurementData structure.
 

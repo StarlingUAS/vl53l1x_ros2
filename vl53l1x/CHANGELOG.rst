@@ -2,6 +2,14 @@
 Changelog for package vl53l1x
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.1 (2021-08-17)
+------------------
+* Ported to ROS2
+* CMAKE updated to ament format. Building of lib and i2c moved into new CmakeLists.txt inside /lib
+* MeasurementData.msg explicilty uses std_msgs/Header
+* i2c_setup now throws runtime_error instead of ROS errors directly for portability.
+* Contributors: Mickey Li
+
 1.0.0 (2021-01-28)
 ------------------
 * Change licence to BSD-3-Clause
