@@ -20,18 +20,18 @@ For Raspberry Pi, there exist prebuilt Debian packages. For installation, [get t
 
 ### Manual
 
-1. Clone the repository into your Catkin workspace:
+1. Clone the repository into your Colcon workspace:
 
     ```bash
-    cd ~/catkin_ws/src
-    git clone https://github.com/okalachev/vl53l1x_ros.git
+    cd ~/dev_ws/src
+    git clone https://github.com/mhl787156/vl53l1x_ros2.git
     ```
 
 2. Build the package:
 
     ```bash
-    cd ~/catkin_ws
-    catkin_make -DCATKIN_WHITELIST_PACKAGES="vl53l1x"
+    cd ~/dev_ws
+    colcon build --packages_select vl53l1x
     ```
 
 ## Quick start
@@ -39,19 +39,19 @@ For Raspberry Pi, there exist prebuilt Debian packages. For installation, [get t
 Run with the default settings:
 
 ```bash
-rosrun vl53l1x vl53l1x_node
+ros2 run vl53l1x vl53l1x_node
 ```
 
 See the ranging results:
 
 ```bash
-rostopic echo /vl53l1x/range
+ros2 topic echo /vl53l1x/range
 ```
 
 See the ranging rate:
 
 ```bash
-rostopic hz /vl53l1x/range
+ros2 topic hz /vl53l1x/range
 ```
 
 ## Parameters
@@ -59,10 +59,10 @@ rostopic hz /vl53l1x/range
 All parameters are optional. Check the [`launch`](https://github.com/okalachev/vl53l1x_ros/tree/master/vl53l1x/launch) folder for launch-file templates.
 
 * `~i2c_bus` (*int*) – I2C bus number (default: 1).
-* `~i2c_address` (*int*) – I2C address (default: 0x29).
+* `~i2c_address` (*int*) – I2C address (default: 41 (i.e. 0x29)). (Note this may need to be given as a base 10 integer within launch files.)
 * `~mode` (*int*) – distance mode, 1 = short, 2 = medium, 3 = long (default: 3).
 * `~timing_budget` (*double*) – timing budget for measurements, *s* (default: 0.1)
-* `~poll_rate` (*double*) – polling data rate, *Hz* (default: 100).
+* `~poll_rate` (*double*) – polling data rate, *Hz* (default: 100.0).
 * `~ignore_range_status` (*bool*) – ignore validness of measurements (default: false).
 * `~min_signal` (*double*) – minimum amplitude of the signal reflected from the target to be considered valid, *MCPS* (default: 1).
 * `~max_sigma` (*double*) – maximum standard deviation of the measurement to be considered valid, *m* (default: 0.015).
@@ -93,10 +93,11 @@ See the [official documentation](https://www.st.com/resource/en/datasheet/vl53l1
 ### Published
 
 * `~range` ([*sensor_msgs/Range*](http://docs.ros.org/kinetic/api/sensor_msgs/html/msg/Range.html)) – resulting measurement.
-* `~data` ([*vl53l1x/MeasurementData*](https://github.com/okalachev/vl53l1x_ros/blob/master/vl53l1x/msg/MeasurementData.msg)) – additional data of the measurement.
+* `~data` ([*vl53l1x/MeasurementData*](https://github.com/mhl787156/vl53l1x_ros2/blob/master/vl53l1x/msg/MeasurementData.msg)) – additional data of the measurement.
 
 ## Copyright
 
+Modified 2021 Mickey Li
 Copyright © 2019 Oleg Kalachev.
 
 Distributed under BSD 3-Clause License (https://opensource.org/licenses/BSD-3-Clause).
