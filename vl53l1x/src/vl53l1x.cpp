@@ -147,7 +147,7 @@ VL53L1X_Node::VL53L1X_Node() :
 	RCLCPP_INFO(this->get_logger(), "VL53L1X: ranging");
 
 	this->timer = this->create_wall_timer(
-		std::chrono::duration<double>(this->poll_rate),
+		std::chrono::duration<double>(1.0 / this->poll_rate),
 		std::bind(&VL53L1X_Node::poll, this)
 	);
 
